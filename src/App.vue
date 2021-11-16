@@ -1,20 +1,16 @@
 <template>
   <v-app>
     <v-main>
-      <EmailSend />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import EmailSend from "./views/EmailSend";
-
 export default {
   name: "App",
 
-  components: {
-    EmailSend,
-  },
+  components: {},
 
   data: () => ({
     //

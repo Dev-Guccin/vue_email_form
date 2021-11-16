@@ -131,7 +131,8 @@
           <editor
             v-if="emailCheckbox"
             :initialValue="emailText"
-            previewStyle="vertical"
+            previewStyle="tab"
+            initialEditType="wysiwyg"
             ref="toastuiEditor"
             style="margin-bottom: 30px"
           />
@@ -251,18 +252,14 @@ export default {
       }
     },
     emailForm(val) {
-	console.log("form changed,",val);
+      console.log("form changed,", val);
       switch (val) {
         case 0:
-          this.onEmailTextChange(
-            "[공지]<br/>안녕하세요. 유스비입니다."
-          );
+          this.onEmailTextChange("[공지]<br/>안녕하세요. 유스비입니다.");
           this.smsText = "[유스비-공지]\n안녕하세요 유스비입니다.";
           break;
         case 1:
-          this.onEmailTextChange(
-            "[긴급공지]<br/>안녕하세요. 유스비입니다."
-          );
+          this.onEmailTextChange("[긴급공지]<br/>안녕하세요. 유스비입니다.");
           this.smsText = "[유스비-긴급공지]\n안녕하세요 유스비입니다.";
           break;
         default:
@@ -294,7 +291,7 @@ export default {
     },
     onEmailTextChange(text) {
       // https://nhn.github.io/tui.editor/latest/ToastUIEditorCore#setHTML api에 대해서 참조함.
-      if(this.emailCheckbox == true)
+      if (this.emailCheckbox == true)
         this.emailText = this.$refs.toastuiEditor.invoke("setHTML", text);
     },
     getEmailText() {
