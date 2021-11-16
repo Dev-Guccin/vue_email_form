@@ -1,9 +1,8 @@
 <template>
   <v-app>
     <h1>Main</h1>
-    <router-link></router-link>
-    <router-link></router-link>
-    <router-link></router-link>
+    <router-link to="/send-message">Go to send-message</router-link>
+    <router-link to="/create-user">Go to create-user</router-link>
   </v-app>
 </template>
 <script src="//unpkg.com/axios/dist/axios.min.js"></script>
