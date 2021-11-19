@@ -30,7 +30,7 @@
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="disabled">SignUp</v-btn>
+              <v-btn color="disabled" @click="test">SignUp</v-btn>
               <!-- <router-link to="/signup">SignUp</router-link> -->
               <v-spacer></v-spacer>
               <v-btn color="primary" @click="submit">Login</v-btn>
@@ -43,6 +43,8 @@
 </template>
 <script>
 import "@toast-ui/editor/dist/toastui-editor.css";
+
+import api from "../api/auth";
 
 /**
  * 아이디, 패스워드
@@ -67,6 +69,11 @@ export default {
       } else {
         alert("로그인 정보가 일치하지 않습니다.");
       }
+    },
+    async test() {
+      console.log(process.env);
+      let tmp = await api.test();
+      console.log(tmp);
     },
   },
 };

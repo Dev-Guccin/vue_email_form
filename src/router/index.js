@@ -42,3 +42,23 @@ export default new VueRouter({
     },
   ],
 })
+/*.beforeEach(async (to, from, next) => { // 라우터로 이동하려고 할때 토큰이 없다면 새롭게 토큰을 받아서 진행해야한다. 이때 필요한것은 이전 토큰을 비교해보는것.
+  // to: 대상 Routee 객체로 이동
+  // from: 현재 라우트로 오기전 라우트
+  // next: 훅을 해결하기 위해 호출 되어야함.
+  if (
+    VueCookie.get('token') === null &&
+    VueCookie.get(refresh_token) !== null
+  ) {
+    await refresh_token() // 토큰을 받아오기
+  }
+  if (
+    to.matched.some((record) => record.meta.unauthorized) ||
+    VueCookie.get('token')
+  ) {
+    return next()
+  }
+  alert('로그인 해주세요.')
+  return next('/login')
+})
+*/
