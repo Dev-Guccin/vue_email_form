@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 // 컴포넌트 불러오기
 
 import Main from '@/views/Main'
+import Login from '@/views/Login'
 import SendMessage from '@/views/SendMessage'
 import CreateUser from '@/views/CreateUser'
 
@@ -15,6 +16,12 @@ export default new VueRouter({
       path: '/',
       name: 'Main',
       component: Main,
+      props: true,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
       props: true,
     },
     {

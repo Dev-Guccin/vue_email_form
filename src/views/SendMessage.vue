@@ -181,7 +181,6 @@
     </vt-snackbar>
   </v-app>
 </template>
-<script src="//unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import "@toast-ui/editor/dist/toastui-editor.css";
 
