@@ -14,14 +14,20 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'Main',
-      component: Main,
+      name: 'Login',
+      component: Login,
       props: true,
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
+      props: true,
+    },
+    {
+      path: '/main',
+      name: 'Main',
+      component: Main,
       props: true,
     },
     {

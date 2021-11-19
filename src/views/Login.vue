@@ -65,7 +65,7 @@ export default {
     submit() {
       console.log("submit!!!");
       if (this.id == "admin" && this.password == "admin") {
-        this.$router.push("/send-message");
+        this.$router.push("/main");
       } else {
         alert("로그인 정보가 일치하지 않습니다.");
       }
