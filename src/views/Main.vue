@@ -5,12 +5,12 @@
     </h1>
     <router-link to="/send-message">Go to send-message</router-link>
     <router-link to="/create-user">Go to create-user</router-link>
+    <a @click="logout">Logout</a>
   </v-app>
 </template>
-<script src="//unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import "@toast-ui/editor/dist/toastui-editor.css";
-
+import api from "../api/auth";
 /**
  * 고객사, 담당자, 이메일, 전화번호
  */
@@ -25,7 +25,13 @@ export default {
   },
   mounted() {},
   beforeDestroy() {},
-  methods: {},
+  methods: {
+    logout() {
+      console.log("[+] logout methods");
+      api.logoutUser(this.getUserName);
+      this.$router.push("/login");
+    },
+  },
   computed: {
     getUserName() {
       return this.$store.getters.getName;

@@ -18,6 +18,11 @@ export const Auth = {
     SET_NAME(state, name) {
       state.name = name
     },
+    RESET_USER(state) {
+      // 유저의 정보를 초기화 해준다.
+      state.name = ''
+      state.token = ''
+    },
   },
   actions: {
     // 비동기 코드를 위해 액션 객체를 사용합니다.

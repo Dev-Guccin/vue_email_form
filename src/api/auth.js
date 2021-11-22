@@ -1,5 +1,5 @@
 import { axiosService } from './index.js'
-
+import store from '../store'
 class API {
   constructor() {}
   // 회원가입 API
@@ -17,6 +17,14 @@ class API {
     return axiosService.post('/login', {
       id: id,
       password: password,
+    })
+  }
+  // 로그아웃 API
+  logoutUser(id) {
+    // 사용자 데이터 초기화
+    store.commit('RESET_USER')
+    return axiosService.post('/logout', {
+      id: id,
     })
   }
 }
