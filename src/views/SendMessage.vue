@@ -2,7 +2,7 @@
   <v-app>
     <div class="main">
       <div>
-        <h1>장애알림 메시지 전송.ver2</h1>
+        <h1>장애알림 메시지 전송</h1>
       </div>
       <div>
         <v-form @submit.prevent="submit">
@@ -125,8 +125,9 @@
           ></v-select>
           <v-text-field
             label="Title"
-            style="margin: 0px 8px 0px 8px"
+            style="margin: 0px 8px 8px 8px"
             v-model="title"
+            hint="문자메세지의 경우 휴대폰 기종에 따라 제목이 보이지 않을 수 있습니다."
           ></v-text-field>
           <editor
             v-if="emailCheckbox"
