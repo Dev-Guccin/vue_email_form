@@ -50,20 +50,6 @@ let router = new VueRouter({
       ],
     },
     {
-      path: '/send-message',
-      name: 'SendMessage',
-      component: SendMessage,
-      props: true,
-      meta: { authRequired: true }, // 로그인이 필요하다는 의미를 meta 데이터로 삽입해준다.
-    },
-    {
-      path: '/create-user',
-      name: 'CreateUser',
-      component: CreateUser,
-      props: true,
-      meta: { authRequired: true }, // 로그인이 필요하다는 의미를 meta 데이터로 삽입해준다.
-    },
-    {
       path: '/*',
       redirect: '/',
     },
