@@ -1,10 +1,6 @@
 import axios from 'axios'
-import Vue from 'vue'
-import Vuex from 'vuex'
 
-Vue.use(Vuex) // Vuex를 설정
-
-export const store = new Vuex.Store({
+export const Auth = {
   state: {
     products: {},
     counter: 2,
@@ -44,4 +40,4 @@ export const store = new Vuex.Store({
     getToken: (state) => state.token,
     getName: (state) => state.name,
   },
-})
+}
