@@ -30,7 +30,7 @@
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="disabled" @click="test">SignUp</v-btn>
+              <v-btn color="disabled" @click="signup">SignUp</v-btn>
               <!-- <router-link to="/signup">SignUp</router-link> -->
               <v-spacer></v-spacer>
               <v-btn color="primary" @click="submit">Login</v-btn>
@@ -83,6 +83,9 @@ export default {
       console.log(process.env);
       let tmp = await api.test();
       console.log(tmp);
+    },
+    signup() {
+      alert("준비중입니다.");
     },
   },
 };
