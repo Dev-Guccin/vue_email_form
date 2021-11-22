@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <h1>Main</h1>
+    <h1>
+      Hello <small>{{ getUserName }}</small>
+    </h1>
     <router-link to="/send-message">Go to send-message</router-link>
     <router-link to="/create-user">Go to create-user</router-link>
   </v-app>
@@ -24,6 +26,11 @@ export default {
   mounted() {},
   beforeDestroy() {},
   methods: {},
+  computed: {
+    getUserName() {
+      return this.$store.getters.getName;
+    },
+  },
 };
 </script>
 

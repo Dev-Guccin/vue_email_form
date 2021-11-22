@@ -13,9 +13,11 @@ class API {
   }
 
   // 로그인 API
-  loginUser(userData) {
-    console.log(userData)
-    return axiosService.post('/login', userData)
+  loginUser(id, password) {
+    return axiosService.post('/login', {
+      id: id,
+      password: password,
+    })
   }
 }
 

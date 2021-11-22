@@ -62,12 +62,21 @@ export default {
   mounted() {},
   beforeDestroy() {},
   methods: {
-    submit() {
+    async submit() {
       console.log("submit!!!");
-      if (this.id == "admin" && this.password == "admin") {
-        this.$router.push("/main");
-      } else {
-        alert("로그인 정보가 일치하지 않습니다.");
+      try {
+        let res = await api.loginUser(this.id, this.password);
+        console.log(res.data);
+        if (res.data.success) {
+          // 진실이라면 로그인 성공
+          this.$store.commit("SET_TOKEN", this.id);
+          this.$store.commit("SET_NAME", this.id);
+          this.$router.push("/main");
+        } else {
+          alert("로그인 정보가 일치하지 않습니다.");
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
     async test() {
