@@ -33,6 +33,21 @@ let router = new VueRouter({
       component: Main,
       props: true,
       meta: { authRequired: true }, // 로그인이 필요하다는 의미를 meta 데이터로 삽입해준다.
+      children: [
+        // Main에 존재하는 router-view안에서 동작하는 컴포넌트들
+        {
+          // /user/:id/profile 과 일치 할 때
+          // UserProfile은 User의 <router-view> 내에 렌더링 됩니다.
+          path: 'send-message',
+          component: SendMessage,
+        },
+        {
+          // /user/:id/posts 과 일치 할 때
+          // UserPosts가 User의 <router-view> 내에 렌더링 됩니다.
+          path: 'create-user',
+          component: CreateUser,
+        },
+      ],
     },
     {
       path: '/send-message',

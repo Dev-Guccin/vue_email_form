@@ -3,9 +3,10 @@
     <h1>
       Hello <small>{{ getUserName }}</small>
     </h1>
-    <router-link to="/send-message">Go to send-message</router-link>
-    <router-link to="/create-user">Go to create-user</router-link>
+    <router-link to="/main/send-message">Go to send-message</router-link>
+    <router-link to="/main/create-user">Go to create-user</router-link>
     <a @click="logout">Logout</a>
+    <router-view></router-view>
   </v-app>
 </template>
 <script>
