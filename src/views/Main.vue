@@ -56,7 +56,7 @@ export default {
         {
           title: "Dashboard",
           icon: "mdi-view-dashboard",
-          path: "/main/create-user",
+          path: "/main/dashboard",
         },
         {
           title: "Send Message",
@@ -88,7 +88,8 @@ export default {
     },
     router(path) {
       console.log(path);
-      this.$router.push(path);
+      console.log(this.$router);
+      if (this.$router.path != path) this.$router.push(path);
     },
   },
   computed: {

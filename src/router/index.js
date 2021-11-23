@@ -9,6 +9,7 @@ import Main from '@/views/Main'
 import Login from '@/views/Login'
 import SendMessage from '@/views/SendMessage'
 import CreateUser from '@/views/CreateUser'
+import DashBoard from '@/views/DashBoard'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,12 @@ let router = new VueRouter({
           // UserPosts가 User의 <router-view> 내에 렌더링 됩니다.
           path: 'create-user',
           component: CreateUser,
+        },
+        {
+          // /user/:id/posts 과 일치 할 때
+          // UserPosts가 User의 <router-view> 내에 렌더링 됩니다.
+          path: 'dashboard',
+          component: DashBoard,
         },
       ],
     },
