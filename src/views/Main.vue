@@ -10,6 +10,10 @@
         <v-list-item-content>
           <v-list-item-title class="text-h6"> Admin </v-list-item-title>
           <v-list-item-subtitle> {{ getUserName }} </v-list-item-subtitle>
+          <v-list-item-subtitle @click="logout"
+            >Logout<v-icon size="18">{{ "mdi-logout-variant" }} </v-icon>
+          </v-list-item-subtitle>
+          <v-btn @click="test">testtest</v-btn>
         </v-list-item-content>
       </v-list-item>
 
@@ -43,6 +47,7 @@
 <script>
 import "@toast-ui/editor/dist/toastui-editor.css";
 import api from "../api/auth";
+import apiPosts from "../api/posts";
 /**
  * 고객사, 담당자, 이메일, 전화번호
  */
@@ -86,10 +91,16 @@ export default {
       api.logoutUser(this.getUserName);
       this.$router.push("/login");
     },
+    async test() {
+      console.log("TESTEST");
+      let res = await apiPosts.test();
+      console.log(res);
+      console.log(res.data);
+    },
     router(path) {
       console.log(path);
-      console.log(this.$router);
-      if (this.$router.path != path) this.$router.push(path);
+      console.log(this.$router.history.current.path);
+      if (this.$router.history.current.path != path) this.$router.push(path);
     },
   },
   computed: {

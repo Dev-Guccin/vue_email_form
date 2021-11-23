@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <div class="main">
-      <div>
-        <h1>장애알림 메시지 전송</h1>
-      </div>
+      <h1>장애알림 메시지 전송</h1>
       <div>
         <v-form @submit.prevent="submit">
           <v-container>
@@ -377,7 +375,6 @@ export default {
 .main {
   min-width: 1000px;
   align-self: center;
-  margin: 20px;
 }
 .content-container {
   border: 2px solid blue;

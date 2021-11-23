@@ -1,10 +1,8 @@
 <template>
   <v-app>
     <div class="main">
+      <h1>고객사 입력폼</h1>
       <v-container>
-        <div>
-          <h2>고객사 입력폼</h2>
-        </div>
         <v-form @submit.prevent="submit">
           <v-text-field
             label="고객사"

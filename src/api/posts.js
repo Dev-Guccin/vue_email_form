@@ -11,5 +11,9 @@ class API {
   createPost(postData) {
     return axiosAuthService.post('/', postData)
   }
+
+  test() {
+    return axiosAuthService.post('/test')
+  }
 }
 export default new API() // 객체 생성해서 반환
