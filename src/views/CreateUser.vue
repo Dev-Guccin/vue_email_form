@@ -1,119 +1,251 @@
 <template>
   <v-app>
     <div class="main">
-      <h1>고객사 입력폼</h1>
+      <h1>고객사 관리</h1>
       <v-container>
-        <v-form @submit.prevent="submit">
-          <v-text-field
-            label="고객사"
-            placeholder="유스비"
-            v-model="company"
-          ></v-text-field>
-          <v-text-field
-            label="담당자"
-            placeholder="황희준"
-            v-model="manager"
-          ></v-text-field>
-          <v-text-field
-            label="이메일"
-            placeholder="ciso@useb.co.kr"
-            v-model="email"
-          ></v-text-field>
-          <v-text-field
-            label="전화번호(-포함)"
-            placeholder="010-1234-5678"
-            v-model="phone"
-          ></v-text-field>
-
-          <v-container>
-            <v-row justify="center">
-              <v-btn
-                depressed
-                style="margin: 0px 10px 0px 0px"
-                @click="cancelMessage"
-                >취소</v-btn
-              >
-              <v-btn
-                depressed
-                color="primary"
-                style="margin-left: 10px; padding: 0px 70px 0px 70px"
-                type="submit"
-              >
-                보내기
-              </v-btn>
-            </v-row>
-          </v-container>
-        </v-form>
+        <h3>필터, 검색</h3>
       </v-container>
       <v-container>
-        <table></table>
+        <v-data-table
+          :headers="headers"
+          :items="users"
+          :items-per-page="5"
+          :loading="tableLoding"
+          loading-text="Loading... Please wait"
+          class="elevation-1"
+          ><template v-slot:top>
+            <v-toolbar flat>
+              <v-toolbar-title>My CRUD</v-toolbar-title>
+              <v-divider class="mx-4" inset vertical></v-divider>
+              <v-spacer></v-spacer>
+              <v-dialog v-model="dialog" max-width="500px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="primary"
+                    dark
+                    class="mb-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    New Item
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formTitle }}</span>
+                  </v-card-title>
+
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.company"
+                            label="company"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.username"
+                            label="username"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.email"
+                            label="email"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.phone"
+                            label="phone"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.status"
+                            label="status"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="close">
+                      Cancel
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="save">
+                      Save
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                  <v-card-title class="text-h5"
+                    >Are you sure you want to delete this item?</v-card-title
+                  >
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="closeDelete"
+                      >Cancel</v-btn
+                    >
+                    <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                      >OK</v-btn
+                    >
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-toolbar>
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon small class="mr-2" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          </template>
+          <template v-slot:no-data>
+            <v-btn color="primary" @click="initialize"> Reset </v-btn>
+          </template>
+        </v-data-table>
       </v-container>
     </div>
   </v-app>
 </template>
-<script src="//unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+import api from "../api/posts";
+
 /**
- * 고객사, 담당자, 이메일, 전화번호
+ *
  */
 export default {
   name: "User",
   components: {},
-  data() {
-    return {
-      company: "",
-      manager: "",
-      email: "",
-      phone: "",
-    };
-  },
-  watch: {},
-  methods: {
-    cancelMessage: function () {
-      if (confirm("입력을 취소하시겠습니까?")) {
-        this.company = "";
-        this.username = "";
-        this.email = "";
-        this.phone = "";
-      }
+  data: () => ({
+    dialog: false,
+    dialogDelete: false,
+    tableLoding: false,
+    headers: [
+      {
+        text: "고객 아이디",
+        align: "",
+        sortable: false,
+        value: "id",
+      },
+      { text: "Company", value: "company" },
+      { text: "Username", value: "username" },
+      { text: "Email", value: "email" },
+      { text: "Phone", value: "phone" },
+      { text: "Regdate", value: "regdate" },
+      { text: "Status", value: "status" },
+      { text: "Actions", value: "actions", sortable: false },
+    ],
+    users: [],
+    editedIndex: -1,
+    editedItem: {
+      name: "",
+      calories: 0,
+      fat: 0,
+      carbs: 0,
+      protein: 0,
     },
-    submit: function () {
-      console.log("[+] submit!!");
-      if (!confirm("입력을 저장하시겠습니까?")) {
-        console.log("입력 취소");
-        return;
+    defaultItem: {
+      name: "",
+      calories: 0,
+      fat: 0,
+      carbs: 0,
+      protein: 0,
+    },
+  }),
+
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+    },
+  },
+
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
+    dialogDelete(val) {
+      val || this.closeDelete();
+    },
+  },
+
+  created() {
+    this.initialize();
+    // api 날려서 회워정보 받아오기
+  },
+
+  methods: {
+    async initialize() {
+      this.tableLoding = true;
+      let res = await api.getUserData();
+      if (res.data.success) {
+        this.users = res.data.users;
       }
-      let data = {
-        company: this.company,
-        username: this.username,
-        email: this.email,
-        phone: this.phone,
-      };
-      // 데이터를 저장 api를 호출한다.
-      this.$axios
-        .post("https://admin.useb.co.kr/create-user", JSON.stringify(data))
-        .then((res) => {
-          console.log(res);
-          if (res.data.success) {
-            console.log(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(res.data);
-        });
-      //this.snackAle
+      this.tableLoding = false;
+    },
+
+    editItem(item) {
+      this.editedIndex = this.users.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+
+    deleteItem(item) {
+      this.editedIndex = this.users.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialogDelete = true;
+    },
+
+    deleteItemConfirm() {
+      this.users.splice(this.editedIndex, 1);
+      this.closeDelete();
+    },
+
+    close() {
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+
+    save() {
+      if (this.editedIndex > -1) {
+        // 업데이트 하는경우
+        Object.assign(this.users[this.editedIndex], this.editedItem);
+      } else {
+        // 새롭게 삽입하는 경우
+        this.users.push(this.editedItem);
+      }
+      this.close();
     },
   },
 };
 </script>
+
 
 <style>
 .inline-block {
   display: inline-block;
 }
 .main {
-  min-width: 1000px;
+  min-width: 1200px;
   align-self: center;
   margin: 20px;
 }

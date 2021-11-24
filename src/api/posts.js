@@ -12,6 +12,19 @@ class API {
     return axiosAuthService.post('/', postData)
   }
 
+  // 유저 데이터를 모두 들고온다.
+  getUserData() {
+    return axiosAuthService.get('/users')
+  }
+  updateUserData(userid, body) {
+    return axiosAuthService.post(`/user/${userid}`, {
+      company: body.company,
+      username: body.username,
+      email: body.email,
+      phone: body.phone,
+      status: body.status,
+    })
+  }
   test() {
     return axiosAuthService.post('/test')
   }
