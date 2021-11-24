@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="app">
     <v-navigation-drawer v-model="drawer" app>
       <v-list-item class="px-2">
         <v-list-item-avatar>
@@ -56,7 +56,7 @@ export default {
   components: {},
   data() {
     return {
-      drawer: false,
+      drawer: true,
       items: [
         {
           title: "Dashboard",

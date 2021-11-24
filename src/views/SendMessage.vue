@@ -277,7 +277,7 @@ export default {
     isEamilAddress(val) {
       let email = val[val.length - 1];
       if (
-        !/[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/.test(
+        !/^[0-9a-zA-Z]*([-_.\\]?[0-9a-zA-Z])*@[0-9a-zA-Z]*([-_.\\]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/.test(
           email
         )
       ) {
