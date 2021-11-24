@@ -8,7 +8,7 @@
             <v-row align="end">
               <v-checkbox
                 v-model="emailCheckbox"
-                :label="`Eamil`"
+                :label="`Email`"
                 style="margin-right: 30px"
               ></v-checkbox>
               <v-checkbox v-model="smsCheckbox" :label="`SMS`"></v-checkbox>
