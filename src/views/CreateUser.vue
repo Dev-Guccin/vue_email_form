@@ -232,7 +232,7 @@ export default {
         try {
           const res = await api.updateUserData(
             this.users[this.editedIndex].id,
-            this.users[this.editedIndex]
+            this.editedItem
           );
           console.log("res data:", res.data);
           Object.assign(this.users[this.editedIndex], this.editedItem);
