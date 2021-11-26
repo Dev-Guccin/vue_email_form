@@ -246,12 +246,12 @@ export default {
           console.log(res.data);
           if (res.data.success) {
             console.log("success");
+            this.initialize();
           } else {
             console.log("fail");
           }
         } catch (err) {
           console.log(err);
-          this.initialize();
         }
       }
       this.close();
