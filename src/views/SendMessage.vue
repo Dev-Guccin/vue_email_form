@@ -203,7 +203,7 @@ export default {
       snackAlertWrong: false,
       snackAlertRight: false,
       emailCheckbox: true,
-      smsCheckbox: true,
+      smsCheckbox: false,
 
       sendToType: 0,
       sendLabels: [
