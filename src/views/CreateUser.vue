@@ -226,12 +226,39 @@ export default {
     },
 
     save() {
+      const data = {
+        company: this.company,
+        username: this.users,
+        email: this.email,
+        phone: this.phone,
+        statuss: this.statuss,
+      };
       if (this.editedIndex > -1) {
         // 업데이트 하는경우
         Object.assign(this.users[this.editedIndex], this.editedItem);
+        try {
+          const res = api.updateUserData(
+            this.users[this.editedIndex].users,
+            data
+          );
+          console.log("res data:", res.data);
+        } catch (err) {
+          console.log(err);
+        }
+        this.initialize();
       } else {
         // 새롭게 삽입하는 경우
-        this.users.push(this.editedItem);
+        try {
+          const res = api.insertUserData(data);
+          if (res.data.success) {
+            console.log("success");
+          } else {
+            console.log("fail");
+          }
+        } catch (err) {
+          console.log(err);
+          this.initialize();
+        }
       }
       this.close();
     },

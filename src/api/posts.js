@@ -16,8 +16,20 @@ class API {
   getUserData() {
     return axiosAuthService.get('/users')
   }
+
+  insertUserData(body) {
+    // 유저데이터를 삽입한다.
+    return axiosAuthService.post(`/user`, {
+      company: body.company,
+      username: body.username,
+      email: body.email,
+      phone: body.phone,
+      status: body.status,
+    })
+  }
+
   updateUserData(userid, body) {
-    return axiosAuthService.post(`/user/${userid}`, {
+    return axiosAuthService.patch(`/user/${userid}`, {
       company: body.company,
       username: body.username,
       email: body.email,
