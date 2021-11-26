@@ -20,7 +20,17 @@
             item-text="label"
             item-value="value"
             menu-props="auto"
-            solo
+            label="send type"
+          ></v-select>
+          <v-select
+            v-if="emailCheckbox"
+            v-model="senderToType"
+            :items="senderLabels"
+            item-text="label"
+            item-value="value"
+            menu-props="auto"
+            label="sender"
+            style="margin: 0px 12px 0px 8px"
           ></v-select>
           <v-combobox
             v-if="sendDirectFlag && emailCheckbox"
@@ -32,7 +42,7 @@
             multiple
             persistent-hint
             small-chips
-            style="margin: -20px 12px 0px 8px"
+            style="margin: 0px 12px 0px 8px"
           >
             <template v-slot:no-data>
               <v-list-item>
@@ -55,7 +65,7 @@
             multiple
             persistent-hint
             small-chips
-            style="margin: -5px 12px 0px 8px"
+            style="margin: 0px 12px 0px 8px"
           >
             <template v-slot:no-data>
               <v-list-item>
@@ -78,7 +88,7 @@
             multiple
             persistent-hint
             small-chips
-            style="margin: -5px 12px 0px 8px"
+            style="margin: 0px 12px 0px 8px"
           >
             <template v-slot:no-data>
               <v-list-item>
@@ -101,7 +111,7 @@
             multiple
             persistent-hint
             small-chips
-            style="margin: -5px 12px 0px 8px"
+            style="margin: 0px 12px 0px 8px"
           >
             <template v-slot:no-data>
               <v-list-item>
@@ -119,11 +129,10 @@
             :items="emailFormList"
             item-text="label"
             item-value="value"
-            solo
+            label="notice type"
           ></v-select>
           <v-text-field
             label="Title"
-            style="margin: 0px 8px 8px 8px"
             v-model="title"
             hint="문자메세지의 경우 휴대폰 기종에 따라 제목이 보이지 않을 수 있습니다."
           ></v-text-field>
@@ -205,6 +214,12 @@ export default {
         { label: "직접입력", value: -1 },
       ],
       sendDirectFlag: false,
+
+      senderToType: "cs@useb.co.kr",
+      senderLabels: [
+        { label: "cs@useb.co.kr", value: "cs@useb.co.kr" },
+        { label: "contact@useb.co.kr", value: "contact@useb.co.kr" },
+      ],
 
       eamilList: ["ghks2047@naver.com", "qwe123@gmail.com"],
       smsList: ["010-2047-0975", "010-1234-1233"],
@@ -373,7 +388,7 @@ export default {
   display: inline-block;
 }
 .main {
-  min-width: 1000px;
+  max-width: 1000px;
   align-self: center;
 }
 .content-container {
