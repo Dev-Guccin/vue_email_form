@@ -228,14 +228,17 @@ export default {
     async save() {
       if (this.editedIndex > -1) {
         // 업데이트 하는경우
-        Object.assign(this.users[this.editedIndex], this.editedItem);
+        console.log(this.users[this.editedIndex]);
         try {
-          const res = await api.updateUserData(this.editedItem);
+          const res = await api.updateUserData(
+            this.users[this.editedIndex].id,
+            this.users[this.editedIndex]
+          );
           console.log("res data:", res.data);
+          Object.assign(this.users[this.editedIndex], this.editedItem);
         } catch (err) {
           console.log(err);
         }
-        this.initialize();
       } else {
         // 새롭게 삽입하는 경우
         try {

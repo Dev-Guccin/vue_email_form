@@ -29,6 +29,7 @@ class API {
   }
 
   updateUserData(userid, body) {
+    console.log(userid, body)
     return axiosAuthService.patch(`/user/${userid}`, {
       company: body.company,
       username: body.username,
