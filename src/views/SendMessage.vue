@@ -215,10 +215,10 @@ export default {
       ],
       sendDirectFlag: false,
 
-      senderToType: "cs@useb.co.kr",
+      senderToType: 0,
       senderLabels: [
-        { label: "cs@useb.co.kr", value: "cs@useb.co.kr" },
-        { label: "contact@useb.co.kr", value: "contact@useb.co.kr" },
+        { label: "cs@useb.co.kr", value: 0 },
+        { label: "contact@useb.co.kr", value: 1 },
       ],
 
       eamilList: ["ghks2047@naver.com", "qwe123@gmail.com"],
@@ -353,6 +353,7 @@ export default {
         sendSms: this.smsCheckbox,
 
         sendToType: this.sendToType,
+        senderToType: this.senderToType,
         emailToList: this.sendToEmailList.join(","),
         smsToList: this.sendToSmsList.join(","),
 
