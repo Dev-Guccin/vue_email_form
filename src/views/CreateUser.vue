@@ -147,18 +147,18 @@ export default {
     users: [],
     editedIndex: -1,
     editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
+      company: "",
+      username: "",
+      email: "",
+      phone: "",
+      status: 1,
     },
     defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
+      company: "",
+      username: "",
+      email: "",
+      phone: "",
+      status: 1,
     },
   }),
 
@@ -225,22 +225,12 @@ export default {
       });
     },
 
-    save() {
-      const data = {
-        company: this.company,
-        username: this.users,
-        email: this.email,
-        phone: this.phone,
-        statuss: this.statuss,
-      };
+    async save() {
       if (this.editedIndex > -1) {
         // 업데이트 하는경우
         Object.assign(this.users[this.editedIndex], this.editedItem);
         try {
-          const res = api.updateUserData(
-            this.users[this.editedIndex].users,
-            data
-          );
+          const res = await api.updateUserData(this.editedItem);
           console.log("res data:", res.data);
         } catch (err) {
           console.log(err);
@@ -249,7 +239,8 @@ export default {
       } else {
         // 새롭게 삽입하는 경우
         try {
-          const res = api.insertUserData(data);
+          const res = await api.insertUserData(this.editedItem);
+          console.log(res.data);
           if (res.data.success) {
             console.log("success");
           } else {
