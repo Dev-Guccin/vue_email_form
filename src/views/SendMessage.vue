@@ -17,7 +17,7 @@
     >
     </vt-snackbar>
     <div class="main">
-      <h1>장애알림 메시지 전송!</h1>
+      <h1>장애알림 메시지 전송</h1>
       <div>
         <v-form @submit.prevent="submit">
           <v-container>
