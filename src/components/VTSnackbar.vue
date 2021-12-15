@@ -4,7 +4,6 @@
     :color="color"
     v-model="visible"
     outlined
-    absolute
     bottom
     right
   >

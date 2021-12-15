@@ -1,7 +1,23 @@
 <template>
   <v-app>
+      <vt-snackbar
+      v-bind:timeout="4000"
+      v-bind:color="`blue`"
+      v-bind:message="`Message send successfully.`"
+      v-bind:snackAlert="snackAlertRight"
+      v-on:update="(val) => (snackAlertRight = val)"
+    >
+    </vt-snackbar>
+    <vt-snackbar
+      v-bind:timeout="4000"
+      v-bind:color="`red`"
+      v-bind:message="`Input is not <strong>valid</strong>. check your input`"
+      v-bind:snackAlert="snackAlertWrong"
+      v-on:update="(val) => (snackAlertWrong = val)"
+    >
+    </vt-snackbar>
     <div class="main">
-      <h1>장애알림 메시지 전송</h1>
+      <h1>장애알림 메시지 전송!</h1>
       <div>
         <v-form @submit.prevent="submit">
           <v-container>
@@ -171,22 +187,7 @@
         </v-form>
       </div>
     </div>
-    <vt-snackbar
-      v-bind:timeout="4000"
-      v-bind:color="`blue`"
-      v-bind:message="`Message send successfully.`"
-      v-bind:snackAlert="snackAlertRight"
-      v-on:update="(val) => (snackAlertRight = val)"
-    >
-    </vt-snackbar>
-    <vt-snackbar
-      v-bind:timeout="4000"
-      v-bind:color="`red`"
-      v-bind:message="`Input is not <strong>valid</strong>. check your input`"
-      v-bind:snackAlert="snackAlertWrong"
-      v-on:update="(val) => (snackAlertWrong = val)"
-    >
-    </vt-snackbar>
+    
   </v-app>
 </template>
 <script>
