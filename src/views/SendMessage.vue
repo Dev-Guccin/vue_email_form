@@ -122,6 +122,7 @@
             v-model="sendBCCEmailList"
             :items="eamilList"
             :search-input.sync="emailSearch"
+            hint="send type에 상관없이 추가적으로 BCC가 추가됩니다."
             label="BCC"
             hide-selected
             multiple
@@ -227,7 +228,7 @@ export default {
       sendToEmailList: [],
       sendToSmsList: [],
       sendCCEmailList: [],
-      sendBCCEmailList: [],
+      sendBCCEmailList: ["marketer@useb.co.kr", "planner@useb.co.kr", "ceo@useb.co.kr"],
       emailSearch: null,
       smsSearch: null,
 
