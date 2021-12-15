@@ -228,7 +228,7 @@ export default {
       sendToEmailList: [],
       sendToSmsList: [],
       sendCCEmailList: [],
-      sendBCCEmailList: ["marketer@useb.co.kr", "planner@useb.co.kr", "ceo@useb.co.kr"],
+      sendBCCEmailList: ["sales@useb.co.kr","sykuseb@useb.co.kr","ceo@useb.co.kr","ableman82@useb.co.kr"],
       emailSearch: null,
       smsSearch: null,
 
