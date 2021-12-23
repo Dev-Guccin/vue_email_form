@@ -239,8 +239,8 @@ export default {
       ],
 
       title: "",
-      emailText: "[공지]<br/>안녕하세요. 유스비입니다.",
-      smsText: "[유스비-공지]\n안녕하세요 유스비입니다.",
+      emailText: "이메일 내용을 입력하세요.",
+      smsText: "문자메세지 내용을 입력하세요.",
     };
   },
   watch: {
@@ -265,22 +265,7 @@ export default {
       if (!this.isEamilAddress(val)) {
         this.$nextTick(() => this.sendBCCEmailList.pop());
       }
-    },
-    emailForm(val) {
-      console.log("form changed,", val);
-      switch (val) {
-        case 0:
-          this.onEmailTextChange("[공지]<br/>안녕하세요. 유스비입니다.");
-          this.smsText = "[유스비-공지]\n안녕하세요 유스비입니다.";
-          break;
-        case 1:
-          this.onEmailTextChange("[긴급공지]<br/>안녕하세요. 유스비입니다.");
-          this.smsText = "[유스비-긴급공지]\n안녕하세요 유스비입니다.";
-          break;
-        default:
-          break;
-      }
-    },
+    }
   },
   mounted() {},
   beforeDestroy() {},
